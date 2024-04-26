@@ -1,4 +1,5 @@
 <template>
+  <div style="margin-left: 30%;">
     <h3>基本信息录入:</h3>
     <el-form :rules="rules" :model="numberValidateForm" ref="numberValidateForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="身份证号:" prop="identity">
@@ -26,6 +27,7 @@
           <el-button class="resetButton" @click="resetForm('numberValidateForm')">重置</el-button>
         </el-form-item>
       </el-form>
+    </div>
 </template>
 <script>
 import axios from "axios"
@@ -64,8 +66,7 @@ export default{
             .post('/api1',data)
             .then(response => {
                 if(response){
-                    console.log(response);
-                    alert('保存成功！')
+                    alert(response.data)
                 }
               }).catch(function (error) { // 请求失败处理
                 console.log(error);
