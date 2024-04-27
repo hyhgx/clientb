@@ -29,8 +29,8 @@
     </div>
         <div class="resultTable">
             <h3>查询结果</h3>
-            <el-table class="table" :data="tableData" >
-                <el-table-column type="expand">
+            <el-table class="table" :data="tableData" style="height: 300px;">
+                <el-table-column type="expand" fixed>
                   <template #default="props">
                     <div m="3" style="margin-left: 10%;">
                       <p m="t-0 b-2">性别: {{ props.row.sex }}</p>
@@ -42,7 +42,8 @@
                 </el-table-column>
                 <el-table-column label="身份证号" prop="identity" width="500px"/>
                 <el-table-column label="姓名" prop="name" />
-              </el-table> 
+              </el-table>
+              <label>总计：{{count}}</label>
         </div>
     </template>
     <script>
@@ -50,6 +51,7 @@
     export default{
         data(){
             return { 
+                count:0,
                 tableData:[],
                 isdisabled:false,
                 queryDataForm:{
@@ -87,7 +89,7 @@
                 //   this.queryDataForm.results=JSON.stringify(response.data);
                 console.log(response.data)
                 this.tableData=response.data
-    
+                this.count=response.data.length;
                 this.isdisabled=false
                 })
               }else{
@@ -98,6 +100,7 @@
           setResultNull(formName){
             this.$refs[formName].resetFields();
             this.tableData=[];
+            this.count=0;
           }
         }
     }
@@ -111,6 +114,7 @@
     }
     .resultTable{
         float: left;
+        margin-left: 20px;
     }
     .table{
         width:100%;
